@@ -17,13 +17,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
-import androidx.compose.foundation.layout.Column
 import coil.compose.rememberAsyncImagePainter
 import com.example.ufanet_practice.data.StoriesViewModel
 import com.example.ufanet_practice.data.Story
 import com.example.ufanet_practice.ui_component.SearchBarComponent
-
 
 class MainActivity : ComponentActivity() {
     private val storiesViewModel: StoriesViewModel by viewModels()
@@ -45,8 +42,8 @@ fun StoriesScreen(viewModel: StoriesViewModel) {
         // Вызов SearchBarComponent
         SearchBarComponent(searchText = searchQuery)
 
-        // Отображаем только отфильтрованные истории
-        StoriesGrid(stories = stories.filter { it.newsName.contains(searchQuery.value, ignoreCase = true) })
+        // Отображаем только отфильтрованные истории, проверяем, что newsName не null
+        StoriesGrid(stories = stories.filter { it.newsName?.contains(searchQuery.value, ignoreCase = true) == true })
     }
 }
 
@@ -54,7 +51,7 @@ fun StoriesScreen(viewModel: StoriesViewModel) {
 fun StoriesGrid(stories: List<Story>) {
     // LazyColumn для создания вертикального списка
     LazyColumn {
-        //разбиваю на 2 строки список
+        // Разбиваем на 2 строки список
         items(stories.chunked(2)) { pair ->
             Row(modifier = Modifier.fillMaxWidth()) {
                 pair.forEach { story ->
@@ -70,21 +67,21 @@ fun StoryItem(story: Story) {
     Card(
         modifier = Modifier
             .padding(8.dp)
-        // равномерное распределение ширины
-
     ) {
         Column {
-            //Coil для загрузки изображений
+            // Coil для загрузки изображений, проверка на null и замена на картинку-заглушку
             Image(
-                painter = rememberAsyncImagePainter(story.imageLogo),
+                painter = rememberAsyncImagePainter(
+                    model = story.imageLogo ?: "https://via.placeholder.com/150"
+                ),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(120.dp) // Установите желаемую высоту для изображения
             )
-            //название истории
+            // Название истории, проверка на null и замена на текст по умолчанию
             Text(
-                text = story.newsName,
+                text = story.newsName ?: "Без названия",
                 modifier = Modifier.padding(8.dp),
             )
         }
