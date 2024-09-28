@@ -52,7 +52,7 @@ fun StoriesGrid(stories: List<Story>) {
     // LazyColumn для создания вертикального списка
     LazyColumn {
         // Разбиваем на 2 строки список
-        items(stories.chunked(2)) { pair ->
+        items(stories.chunked(1)) { pair ->
             Row(modifier = Modifier.fillMaxWidth()) {
                 pair.forEach { story ->
                     StoryItem(story)
