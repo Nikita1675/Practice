@@ -8,8 +8,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class StoriesViewModel : ViewModel() {
-    private val _stories = MutableStateFlow<List<Story>>(emptyList())
-    val stories: StateFlow<List<Story>> = _stories
+    private val _originalStories = MutableStateFlow<List<Story>>(emptyList())  // Оригинальный список историй
+    private val _filteredStories = MutableStateFlow<List<Story>>(emptyList())  // Фильтрованный список
+
+    val stories: StateFlow<List<Story>> = _filteredStories
 
     init {
         fetchStories()
@@ -22,15 +24,12 @@ class StoriesViewModel : ViewModel() {
 
                 val response = RetrofitInstance.api.getStories()
 
-                // Логи
-                Log.d("StoriesViewModel", "API response: ${response.code()}")
-
                 if (response.isSuccessful) {
-                    // Изменение: получение списка через обёртку "detail"
                     val storiesList = response.body()?.detail?.stories ?: emptyList()
                     Log.d("StoriesViewModel", "Fetched stories: $storiesList")
 
-                    _stories.value = storiesList
+                    _originalStories.value = storiesList
+                    _filteredStories.value = storiesList  // Отображаем полный список до фильтрации
                 } else {
                     Log.e("StoriesViewModel", "Failed to fetch stories: ${response.message()}")
                 }
@@ -42,14 +41,16 @@ class StoriesViewModel : ViewModel() {
 
     // Фильтрация списка по ключевому слову
     fun filterStories(query: String) {
-        val filteredStories = _stories.value.filter {
-            it.newsName?.contains(query, ignoreCase = true) == true // Проверка на null перед contains()
+        if (query.isBlank()) {
+            _filteredStories.value = _originalStories.value  // Если строка поиска пуста, показываем оригинальный список
+        } else {
+            val filteredStories = _originalStories.value.filter {
+                it.newsName?.contains(query, ignoreCase = true) == true
+            }
+            _filteredStories.value = filteredStories
         }
-        _stories.value = filteredStories
-        Log.d("StoriesViewModel", "Filtered stories: $filteredStories")
+        Log.d("StoriesViewModel", "Filtered stories: ${_filteredStories.value}")
     }
-
 }
-
 
 
