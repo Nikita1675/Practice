@@ -27,14 +27,14 @@ fun SearchBarComponent(
         modifier = modifier
             .padding(20.dp)
             .fillMaxWidth()
-            .background(Color.White, shape = RoundedCornerShape(6.dp))  //фон до обводки
-            .border(
+            //.background(Color.White, shape = RoundedCornerShape(6.dp))  //фон до обводки
+            /*.border(
                 width = 2.dp,  // Ширина обводки
                 color = Color.Red,  // Цвет обводки
                 shape = RoundedCornerShape(6.dp)  // Закругленные углы
-            ),
+            )*/,
         colors = SearchBarDefaults.colors(
-            containerColor = Color.White  //белый фон, чтобы выделить обводку
+            containerColor = Color.LightGray  //белый фон, чтобы выделить обводку
         ),
         query = searchText.value,
         onQueryChange = { text ->
