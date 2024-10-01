@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun StoriesScreen(viewModel: StoriesViewModel) {
-    // Подписываемся на список историй из ViewModel
+    // Подписываюсь на список историй из ViewModel
     val stories by viewModel.stories.collectAsState()
 
     // Состояние для текста поиска

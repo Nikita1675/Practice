@@ -31,7 +31,7 @@ class StoriesViewModel : ViewModel() {
                     Log.d("StoriesViewModel", "Fetched stories: $storiesList")
 
                     _originalStories.value = storiesList
-                    _filteredStories.value = storiesList  // Отображаем полный список до фильтрации
+                    _filteredStories.value = storiesList  // Отображает полный список до фильтрации
                 } else {
                     Log.e("StoriesViewModel", "Failed to fetch stories: ${response.message()}")
                 }
@@ -44,7 +44,7 @@ class StoriesViewModel : ViewModel() {
     // Фильтрация списка по ключевому слову
     fun filterStories(query: String) {
         if (query.isBlank()) {
-            _filteredStories.value = _originalStories.value  // Если строка поиска пуста, показываем оригинальный список
+            _filteredStories.value = _originalStories.value  // Если строка поиска пуста, показывает оригинальный список
         } else {
             val filteredStories = _originalStories.value.filter {
                 it.newsName?.contains(query, ignoreCase = true) == true

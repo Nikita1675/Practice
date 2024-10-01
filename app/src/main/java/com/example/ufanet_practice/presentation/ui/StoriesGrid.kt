@@ -58,7 +58,7 @@ fun StoryItem(story: Story) {
         modifier = Modifier
             .aspectRatio(1f) // Соотношение сторон 1:1 для квадрата
             .padding(6.dp),  // Отступы между карточками
-        shape = commonRoundedCornerShape // Закругляем края карточки
+        shape = commonRoundedCornerShape // Закругляю края карточки
     ) {
         Column(
             modifier = Modifier
@@ -73,8 +73,8 @@ fun StoryItem(story: Story) {
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp) // Увеличьте высоту, если нужно
-                    .clip(commonRoundedCornerShape) // Закругляем углы изображения с тем же радиусом
+                    .height(100.dp)
+                    .clip(commonRoundedCornerShape) // Закругляет углы изображения с тем же радиусом
                     .clickable {
                         // Переход по ссылке при нажатии на картинку
                         story.url?.let { url ->
@@ -82,21 +82,21 @@ fun StoryItem(story: Story) {
                             context.startActivity(intent)
                         }
                     },
-                contentScale = ContentScale.Crop // Заполняем область, обрезая правую сторону
+                contentScale = ContentScale.Crop // Заполняет область, обрезая правую сторону
             )
-            // Отображаем название истории с отступом
+            // Отображает название истории с отступом
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween // Распределяем пространство между текстом и кнопкой
+                horizontalArrangement = Arrangement.SpaceBetween // Распределяет пространство между текстом и кнопкой
             ) {
                 Text(
                     text = story.newsName ?: "Без названия",
                     modifier = Modifier
                         .padding(top = 5.dp) // Внутренний отступ текста
-                        .weight(1f), // Используем вес, чтобы текст занимал все доступное пространство
-                    maxLines = 2 // Ограничиваем количество строк
+                        .weight(1f), // Использует вес, чтобы текст занимал все доступное пространство
+                    maxLines = 2 // Ограничивает количество строк
                 )
-                // Добавляем кнопку избранного с отступами
+                // Добавляю кнопку избранного с отступами
                 Column(
                     modifier = Modifier.padding(start = 20.dp, top = 26.dp) // Отступы слева и сверху для кнопки
                 ) {
