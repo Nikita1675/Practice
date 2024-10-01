@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.example.ufanet_practice.data.viewmodel.StoriesViewModel
+import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
 import com.example.ufanet_practice.presentation.ui.StoriesGrid
 import com.example.ufanet_practice.presentation.ui.SearchBarComponent
 
