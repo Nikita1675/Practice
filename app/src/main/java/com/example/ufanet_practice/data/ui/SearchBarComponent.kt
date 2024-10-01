@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.ui_component
+package com.example.ufanet_practice.data.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,7 +14,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.ufanet_practice.data.StoriesViewModel
+import com.example.ufanet_practice.data.viewmodel.StoriesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

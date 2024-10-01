@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.data
+package com.example.ufanet_practice.data.model
 
 import com.google.gson.annotations.SerializedName
 

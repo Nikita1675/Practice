@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.ui_component
+package com.example.ufanet_practice.data.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.ufanet_practice.data.Story
+import com.example.ufanet_practice.data.model.Story
 
 // Определим одинаковую форму для карточек и изображений
 val commonRoundedCornerShape = RoundedCornerShape(8.dp)

@@ -1,5 +1,6 @@
-package com.example.ufanet_practice.data
+package com.example.ufanet_practice.data.repository
 
+import com.example.ufanet_practice.data.api.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

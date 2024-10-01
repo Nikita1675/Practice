@@ -1,6 +1,5 @@
-package com.example.ufanet_practice.ui.theme
+package com.example.ufanet_practice.data.ui
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

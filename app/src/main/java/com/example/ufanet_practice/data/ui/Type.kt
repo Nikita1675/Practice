@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.ui.theme
+package com.example.ufanet_practice.data.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
