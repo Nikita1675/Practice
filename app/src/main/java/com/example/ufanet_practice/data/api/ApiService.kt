@@ -1,6 +1,6 @@
 package com.example.ufanet_practice.data.api
 
-import com.example.ufanet_practice.data.model.StoriesResponse
+import com.example.ufanet_practice.domain.model.StoriesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

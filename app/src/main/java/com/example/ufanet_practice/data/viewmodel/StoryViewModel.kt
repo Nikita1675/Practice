@@ -3,8 +3,8 @@ package com.example.ufanet_practice.data.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ufanet_practice.data.repository.RetrofitInstance
-import com.example.ufanet_practice.data.model.Story
+import com.example.ufanet_practice.domain.repository.RetrofitInstance
+import com.example.ufanet_practice.domain.model.Story
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

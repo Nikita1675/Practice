@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.data.repository
+package com.example.ufanet_practice.domain.repository
 
 import com.example.ufanet_practice.data.api.ApiService
 import retrofit2.Retrofit

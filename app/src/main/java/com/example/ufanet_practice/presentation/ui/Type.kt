@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.data.ui
+package com.example.ufanet_practice.presentation.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.data.main
+package com.example.ufanet_practice.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.example.ufanet_practice.data.viewmodel.StoriesViewModel
-import com.example.ufanet_practice.data.ui.StoriesGrid
-import com.example.ufanet_practice.data.ui.SearchBarComponent
+import com.example.ufanet_practice.presentation.ui.StoriesGrid
+import com.example.ufanet_practice.presentation.ui.SearchBarComponent
 
 class MainActivity : ComponentActivity() {
     private val storiesViewModel: StoriesViewModel by viewModels()
