@@ -3,42 +3,38 @@ package com.example.ufanet_practice.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.lifecycle.ViewModelProvider
+import com.example.ufanet_practice.presentation.ui.StoriesScreen
+import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
 import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
-import com.example.ufanet_practice.presentation.ui.StoriesGrid
-import com.example.ufanet_practice.presentation.ui.SearchBarComponent
+import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModelFactory
+import com.example.ufanet_practice.domain.usecase.GetStoriesUseCase
+import com.example.ufanet_practice.data.repository.StoriesRepository
 
 class MainActivity : ComponentActivity() {
-    private val storiesViewModel: StoriesViewModel by viewModels()
+    private lateinit var storiesViewModel: StoriesViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel // Добавляем ViewModel для избранного
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Инициализируем необходимые зависимости
+        val repository = StoriesRepository()
+        val getStoriesUseCase = GetStoriesUseCase(repository)
+        val viewModelFactory = StoriesViewModelFactory(getStoriesUseCase)
+
+        // Получаем экземпляр ViewModel через фабрику
+        storiesViewModel = ViewModelProvider(this, viewModelFactory).get(StoriesViewModel::class.java)
+
+        // Инициализируем ViewModel для избранного
+        favoritesViewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
+
         setContent {
-            StoriesScreen(storiesViewModel)
+            // Передаем оба ViewModel в StoriesScreen
+            StoriesScreen(
+                storiesViewModel = storiesViewModel, // Передаем storiesViewModel
+                favoritesViewModel = favoritesViewModel // Передаем favoritesViewModel
+            )
         }
     }
 }
-
-@Composable
-fun StoriesScreen(viewModel: StoriesViewModel) {
-    // Подписываюсь на список историй из ViewModel
-    val stories by viewModel.stories.collectAsState()
-
-    // Состояние для текста поиска
-    val searchQuery = remember { mutableStateOf("") }
-
-    Column {
-        // Вызов компонента поиска и передача ViewModel для фильтрации
-        SearchBarComponent(searchText = searchQuery, viewModel = viewModel)
-
-        // Отображение отфильтрованных историй, которые уже фильтруются в ViewModel
-        StoriesGrid(stories = stories)
-    }
-}
-

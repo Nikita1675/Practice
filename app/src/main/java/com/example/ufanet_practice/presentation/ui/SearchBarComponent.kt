@@ -1,7 +1,5 @@
 package com.example.ufanet_practice.presentation.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,13 +24,7 @@ fun SearchBarComponent(
     SearchBar(
         modifier = modifier
             .padding(20.dp)
-            .fillMaxWidth()
-            //.background(Color.White, shape = RoundedCornerShape(6.dp))  //фон до обводки
-            /*.border(
-                width = 2.dp,  // Ширина обводки
-                color = Color.Red,  // Цвет обводки
-                shape = RoundedCornerShape(6.dp)  // Закругленные углы
-            )*/,
+            .fillMaxWidth(),
         colors = SearchBarDefaults.colors(
             containerColor = Color.LightGray  //белый фон, чтобы выделить обводку
         ),

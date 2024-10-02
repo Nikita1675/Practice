@@ -1,4 +1,4 @@
-package com.example.ufanet_practice.presentation.ui
+package com.example.ufanet_practice.ui
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
