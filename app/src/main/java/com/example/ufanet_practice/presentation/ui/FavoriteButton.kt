@@ -22,7 +22,7 @@ fun FavoriteButton(isFavorite: Boolean, onToggleFavorite: () -> Unit) {
         Image(
             painter = painterResource(id = if (isFavorite) R.drawable.state_on else R.drawable.state_off),
             contentDescription = if (isFavorite) "Избранное" else "Не избранное",
-            modifier = Modifier.size(28.dp),
+            modifier = Modifier.size(50.dp),
             colorFilter = ColorFilter.tint(if (isFavorite) Color.Red else Color.Gray) // Цвет иконки в зависимости от состояния
         )
     }

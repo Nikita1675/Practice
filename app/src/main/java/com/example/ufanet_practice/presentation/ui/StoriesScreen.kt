@@ -11,7 +11,7 @@ import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
 
 @Composable
 fun StoriesScreen(storiesViewModel: StoriesViewModel, favoritesViewModel: FavoritesViewModel) {
-    // Подписываемся на список историй из ViewModel
+    // Подписывает на список историй из ViewModel
     val stories by storiesViewModel.stories.collectAsState()
 
     // Состояние для текста поиска

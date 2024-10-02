@@ -23,9 +23,9 @@ val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 @Composable
 fun StoryItem(
     story: Story,
-    favoritesViewModel: FavoritesViewModel // Добавляем параметр для ViewModel избранного
+    favoritesViewModel: FavoritesViewModel // Добавляет параметр для ViewModel избранного
 ) {
-    val context = LocalContext.current // Получаем контекст
+    val context = LocalContext.current // Получает контекст
 
     Card(
         modifier = Modifier
@@ -69,14 +69,14 @@ fun StoryItem(
                         .weight(1f), // Использует вес, чтобы текст занимал все доступное пространство
                     maxLines = 2 // Ограничивает количество строк
                 )
-                // Добавляю кнопку избранного с отступами
+                // Добавляю кнопку избранного с меньшими отступами
                 Column(
-                    modifier = Modifier.padding(start = 20.dp, top = 26.dp) // Отступы слева и сверху для кнопки
+                    modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 7.dp,) // Уменьшает отступ слева для кнопки
                 ) {
                     FavoriteButton(
-                        isFavorite = favoritesViewModel.isFavorite(story), // Проверяем, избранная ли история
+                        isFavorite = favoritesViewModel.isFavorite(story), // Проверяет, избранная ли история
                         onToggleFavorite = {
-                            favoritesViewModel.toggleFavorite(story) // Переключаем избранное
+                            favoritesViewModel.toggleFavorite(story) // Переключает избранное
                         }
                     )
                 }

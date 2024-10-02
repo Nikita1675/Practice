@@ -13,27 +13,27 @@ import com.example.ufanet_practice.data.repository.StoriesRepository
 
 class MainActivity : ComponentActivity() {
     private lateinit var storiesViewModel: StoriesViewModel
-    private lateinit var favoritesViewModel: FavoritesViewModel // Добавляем ViewModel для избранного
+    private lateinit var favoritesViewModel: FavoritesViewModel // Добавляет ViewModel для избранного
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Инициализируем необходимые зависимости
+        // Инициализирует необходимые зависимости
         val repository = StoriesRepository()
         val getStoriesUseCase = GetStoriesUseCase(repository)
         val viewModelFactory = StoriesViewModelFactory(getStoriesUseCase)
 
-        // Получаем экземпляр ViewModel через фабрику
+        // Получает экземпляр ViewModel через фабрику
         storiesViewModel = ViewModelProvider(this, viewModelFactory).get(StoriesViewModel::class.java)
 
-        // Инициализируем ViewModel для избранного
+        // Инициализирует ViewModel для избранного
         favoritesViewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
 
         setContent {
-            // Передаем оба ViewModel в StoriesScreen
+            // Передает оба ViewModel в StoriesScreen
             StoriesScreen(
-                storiesViewModel = storiesViewModel, // Передаем storiesViewModel
-                favoritesViewModel = favoritesViewModel // Передаем favoritesViewModel
+                storiesViewModel = storiesViewModel, // Передает storiesViewModel
+                favoritesViewModel = favoritesViewModel // Передает favoritesViewModel
             )
         }
     }
