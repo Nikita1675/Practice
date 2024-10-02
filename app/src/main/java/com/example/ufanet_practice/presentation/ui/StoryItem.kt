@@ -9,7 +9,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -22,7 +21,10 @@ import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
 val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 
 @Composable
-fun StoryItem(story: Story, favoritesViewModel: FavoritesViewModel) {
+fun StoryItem(
+    story: Story,
+    favoritesViewModel: FavoritesViewModel // Добавляем параметр для ViewModel избранного
+) {
     val context = LocalContext.current // Получаем контекст
 
     Card(
@@ -71,13 +73,10 @@ fun StoryItem(story: Story, favoritesViewModel: FavoritesViewModel) {
                 Column(
                     modifier = Modifier.padding(start = 20.dp, top = 26.dp) // Отступы слева и сверху для кнопки
                 ) {
-                    // Проверяем, находится ли история в избранном
-                    val isFavorite = remember { favoritesViewModel.isFavorite(story) }
-
                     FavoriteButton(
-                        isFavorite = isFavorite,
+                        isFavorite = favoritesViewModel.isFavorite(story), // Проверяем, избранная ли история
                         onToggleFavorite = {
-                            favoritesViewModel.toggleFavorite(story)
+                            favoritesViewModel.toggleFavorite(story) // Переключаем избранное
                         }
                     )
                 }

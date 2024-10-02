@@ -24,7 +24,7 @@ fun StoriesGrid(stories: List<Story>, favoritesViewModel: FavoritesViewModel) {
             ) {
                 pair.forEach { story ->
                     Box(modifier = Modifier.weight(1f)) {
-                        StoryItem(story = story, favoritesViewModel = favoritesViewModel) // Передаем ViewModel
+                        StoryItem(story, favoritesViewModel) // Передаем favoritesViewModel
                     }
                 }
 
