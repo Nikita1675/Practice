@@ -23,22 +23,21 @@ val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 @Composable
 fun StoryItem(
     story: Story,
-    favoritesViewModel: FavoritesViewModel // Добавляет параметр для ViewModel избранного
+    favoritesViewModel: FavoritesViewModel // Передача ViewModel избранного
 ) {
-    val context = LocalContext.current // Получает контекст
+    val context = LocalContext.current
 
     Card(
         modifier = Modifier
-            .aspectRatio(1f) // Соотношение сторон 1:1 для квадрата
-            .padding(6.dp),  // Отступы между карточками
-        shape = commonRoundedCornerShape // Закругляю края карточки
+            .aspectRatio(1f)
+            .padding(6.dp),
+        shape = commonRoundedCornerShape
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(3.dp) // Внутренние отступы в карточке
+                .padding(3.dp)
         ) {
-            // Картинка вверху, с закругленными углами
             Image(
                 painter = rememberAsyncImagePainter(
                     model = story.imageLogo ?: "https://via.placeholder.com/150"
@@ -47,36 +46,33 @@ fun StoryItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(100.dp)
-                    .clip(commonRoundedCornerShape) // Закругляет углы изображения с тем же радиусом
+                    .clip(commonRoundedCornerShape)
                     .clickable {
-                        // Переход по ссылке при нажатии на картинку
                         story.url?.let { url ->
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                             context.startActivity(intent)
                         }
                     },
-                contentScale = ContentScale.Crop // Заполняет область, обрезая правую сторону
+                contentScale = ContentScale.Crop
             )
-            // Отображает название истории с отступом
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween // Распределяет пространство между текстом и кнопкой
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = story.newsName ?: "Без названия",
                     modifier = Modifier
-                        .padding(top = 5.dp) // Внутренний отступ текста
-                        .weight(1f), // Использует вес, чтобы текст занимал все доступное пространство
-                    maxLines = 2 // Ограничивает количество строк
+                        .padding(top = 5.dp)
+                        .weight(1f),
+                    maxLines = 2
                 )
-                // Добавляю кнопку избранного с меньшими отступами
                 Column(
-                    modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 7.dp,) // Уменьшает отступ слева для кнопки
+                    modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 7.dp)
                 ) {
                     FavoriteButton(
-                        isFavorite = favoritesViewModel.isFavorite(story), // Проверяет, избранная ли история
+                        isFavorite = favoritesViewModel.isFavorite(story),
                         onToggleFavorite = {
-                            favoritesViewModel.toggleFavorite(story) // Переключает избранное
+                            favoritesViewModel.toggleFavorite(story)
                         }
                     )
                 }

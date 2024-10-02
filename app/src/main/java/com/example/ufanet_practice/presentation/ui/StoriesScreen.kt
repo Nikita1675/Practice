@@ -11,17 +11,12 @@ import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
 
 @Composable
 fun StoriesScreen(storiesViewModel: StoriesViewModel, favoritesViewModel: FavoritesViewModel) {
-    // Подписывает на список историй из ViewModel
     val stories by storiesViewModel.stories.collectAsState()
 
-    // Состояние для текста поиска
     val searchQuery = remember { mutableStateOf("") }
 
     Column {
-        // Вызов компонента поиска и передача ViewModel для фильтрации
         SearchBarComponent(searchText = searchQuery, viewModel = storiesViewModel)
-
-        // Отображение отфильтрованных историй, которые уже фильтруются в ViewModel
         StoriesGrid(stories = stories, favoritesViewModel = favoritesViewModel)
     }
 }

@@ -11,7 +11,8 @@ class GetStoriesUseCase(private val repository: StoriesRepository) {
                 newsName = storyDto.newsName,
                 imageLogo = storyDto.imageLogo,
                 url = storyDto.url,
-                isFavorite = storyDto.isFavorite // Обязательно проверьте наличие этого свойства в StoryDto
+                isFavorite = storyDto.isFavorite, // Это поле из DTO
+                uniqueName = storyDto.uniqueName // это поле uniqueName
             )
         } ?: emptyList()
     }
