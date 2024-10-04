@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.ufanet_practice.R
 import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,7 +37,7 @@ fun SearchBarComponent(
         },
         onSearch = {},
         placeholder = {
-            Text(text = "Поиск")
+            Text(text = stringResource(id = R.string.search_hint))
         },
         shape = RoundedCornerShape(6.dp),
         active = false,

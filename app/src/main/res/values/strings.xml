@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ufanet_Practice</string>
+    <string name="search_hint">Поиск</string>
 </resources>
