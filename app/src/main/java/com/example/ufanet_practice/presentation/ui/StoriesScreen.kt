@@ -6,17 +6,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
-import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
+import com.example.ufanet_practice.presentation.viewmodel.StoriesFavoritesViewModel
 
 @Composable
-fun StoriesScreen(storiesViewModel: StoriesViewModel, favoritesViewModel: FavoritesViewModel) {
-    val stories by storiesViewModel.stories.collectAsState()
-
+fun StoriesScreen(viewModel: StoriesFavoritesViewModel) {
+    val stories by viewModel.stories.collectAsState()
     val searchQuery = remember { mutableStateOf("") }
 
     Column {
-        SearchBarComponent(searchText = searchQuery, viewModel = storiesViewModel)
-        StoriesGrid(stories = stories, favoritesViewModel = favoritesViewModel)
+        // Передача searchQuery и viewModel в компонент поиска
+        SearchBarComponent(searchText = searchQuery, viewModel = viewModel)
+        // Передача только одной viewModel в StoriesGrid
+        StoriesGrid(stories = stories, viewModel = viewModel)
     }
 }

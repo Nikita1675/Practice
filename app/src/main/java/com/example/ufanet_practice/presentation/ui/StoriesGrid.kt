@@ -7,30 +7,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.ufanet_practice.domain.model.Story
-import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
+import com.example.ufanet_practice.presentation.model.StoryUiModel
+import com.example.ufanet_practice.presentation.viewmodel.StoriesFavoritesViewModel
+
 
 @Composable
-fun StoriesGrid(stories: List<Story>, favoritesViewModel: FavoritesViewModel) {
+fun StoriesGrid(stories: List<StoryUiModel>, viewModel: StoriesFavoritesViewModel) {
     LazyColumn(
-        modifier = Modifier
-            .padding(15.dp) // Одинаковые отступы от краёв экрана
+        modifier = Modifier.padding(15.dp)
     ) {
         items(stories.chunked(2)) { pair ->
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 1.dp), // Отступы между строками
-                horizontalArrangement = Arrangement.spacedBy(1.dp) // Отступы между элементами в строке
+                modifier = Modifier.fillMaxWidth().padding(vertical = 1.dp),
+                horizontalArrangement = Arrangement.spacedBy(1.dp)
             ) {
                 pair.forEach { story ->
                     Box(modifier = Modifier.weight(1f)) {
-                        StoryItem(story, favoritesViewModel) // Передаем favoritesViewModel
+                        StoryItem(story = story, viewModel = viewModel)
                     }
                 }
 
-                // Проверка на нечетное количество элементов
                 if (pair.size < 2) {
-                    Spacer(modifier = Modifier.weight(1f)) // Заполнение пустого пространства
+                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
         }
