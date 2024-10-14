@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.ufanet_practice.R
 
@@ -17,13 +18,13 @@ fun FavoriteButton(isFavorite: Boolean, onToggleFavorite: () -> Unit) {
     Box(
         modifier = Modifier
             .size(28.dp)
-            .clickable { onToggleFavorite() } // Обработка клика для смены состояния избранного
+            .clickable { onToggleFavorite() }
     ) {
         Image(
             painter = painterResource(id = if (isFavorite) R.drawable.state_on else R.drawable.state_off),
-            contentDescription = if (isFavorite) "Избранное" else "Не избранное",
+            contentDescription = stringResource(id = if (isFavorite) R.string.favorite else R.string.not_favorite),
             modifier = Modifier.size(50.dp),
-            colorFilter = ColorFilter.tint(if (isFavorite) Color.Red else Color.Gray) // Цвет иконки в зависимости от состояния
+            colorFilter = ColorFilter.tint(if (isFavorite) Color.Red else Color.Gray)
         )
     }
 }

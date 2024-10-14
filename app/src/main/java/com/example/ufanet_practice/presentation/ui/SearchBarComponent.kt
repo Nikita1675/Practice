@@ -20,7 +20,7 @@ import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
 @Composable
 fun SearchBarComponent(
     searchText: MutableState<String>,
-    viewModel: StoriesViewModel,  // Передаёт ViewModel в компонент
+    viewModel: StoriesViewModel,
     modifier: Modifier = Modifier
 ) {
     SearchBar(
@@ -28,12 +28,12 @@ fun SearchBarComponent(
             .padding(20.dp)
             .fillMaxWidth(),
         colors = SearchBarDefaults.colors(
-            containerColor = Color.LightGray  //белый фон, чтобы выделить обводку
+            containerColor = Color.LightGray
         ),
         query = searchText.value,
         onQueryChange = { text ->
             searchText.value = text
-            viewModel.filterStories(text)  // Вызывает фильтрацию при изменении текста
+            viewModel.filterStories(text)
         },
         onSearch = {},
         placeholder = {
@@ -44,3 +44,4 @@ fun SearchBarComponent(
         onActiveChange = {}
     ) {}
 }
+

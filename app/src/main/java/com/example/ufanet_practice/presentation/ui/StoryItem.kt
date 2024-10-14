@@ -13,17 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.ufanet_practice.domain.model.Story
 import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
+import com.example.ufanet_practice.R
 
 val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun StoryItem(
     story: Story,
-    favoritesViewModel: FavoritesViewModel // Передача ViewModel избранного
+    favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
 
@@ -60,7 +62,7 @@ fun StoryItem(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = story.newsName ?: "Без названия",
+                    text = story.newsName ?: stringResource(id = R.string.no_title),
                     modifier = Modifier
                         .padding(top = 5.dp)
                         .weight(1f),

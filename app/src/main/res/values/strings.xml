@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Ufanet_Practice</string>
     <string name="search_hint">Поиск</string>
+    <string name="no_title">Без названия</string>
+    <string name="favorite">Избранное</string>
+    <string name="not_favorite">Не избранное</string>
 </resources>
