@@ -9,6 +9,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -16,16 +18,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
 import com.example.ufanet_practice.R
 import com.example.ufanet_practice.presentation.model.StoryPresentation
+import com.example.ufanet_practice.presentation.viewmodel.FavoritesStoryViewModel
 
 val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun StoryItem(
-    story: StoryPresentation, // Используем StoryPresentation
-    favoritesViewModel: FavoritesViewModel
+    story: StoryPresentation,
+    favoritesViewModel: FavoritesStoryViewModel
 ) {
     val context = LocalContext.current
 
@@ -71,10 +73,12 @@ fun StoryItem(
                 Column(
                     modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 7.dp)
                 ) {
+                    // Используем collectAsState для проверки избранного
+                    val isFavorite by favoritesViewModel.favoriteStories.collectAsState()
                     FavoriteButton(
-                        isFavorite = favoritesViewModel.isFavorite(story), // Проверяем, является ли история избранной
+                        isFavorite = favoritesViewModel.isFavorite(story),
                         onToggleFavorite = {
-                            favoritesViewModel.toggleFavorite(story) // Переключаем избранное
+                            favoritesViewModel.toggleFavorite(story)
                         }
                     )
                 }

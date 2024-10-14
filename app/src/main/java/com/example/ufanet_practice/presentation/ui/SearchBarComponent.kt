@@ -14,13 +14,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.ufanet_practice.R
-import com.example.ufanet_practice.presentation.viewmodel.StoriesViewModel
+import com.example.ufanet_practice.presentation.viewmodel.FavoritesStoryViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBarComponent(
     searchText: MutableState<String>,
-    viewModel: StoriesViewModel,
+    viewModel: FavoritesStoryViewModel, // Изменено на FavoritesStoryViewModel
     modifier: Modifier = Modifier
 ) {
     SearchBar(
@@ -33,7 +33,7 @@ fun SearchBarComponent(
         query = searchText.value,
         onQueryChange = { text ->
             searchText.value = text
-            viewModel.filterStories(text)
+            viewModel.filterStories(text) // Используем filterStories из нового ViewModel
         },
         onSearch = {},
         placeholder = {
@@ -44,4 +44,3 @@ fun SearchBarComponent(
         onActiveChange = {}
     ) {}
 }
-

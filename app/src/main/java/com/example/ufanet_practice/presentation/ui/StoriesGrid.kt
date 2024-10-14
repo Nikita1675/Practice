@@ -6,15 +6,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.ufanet_practice.domain.model.Story
 import com.example.ufanet_practice.presentation.model.StoryPresentation
-import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
+import com.example.ufanet_practice.presentation.viewmodel.FavoritesStoryViewModel
 
 @Composable
-fun StoriesGrid(stories: List<StoryPresentation>, favoritesViewModel: FavoritesViewModel) {
+fun StoriesGrid(stories: List<StoryPresentation>, favoritesViewModel: FavoritesStoryViewModel) {
     LazyColumn(
-        modifier = Modifier
-            .padding(15.dp) // Одинаковые отступы от краёв экрана
+        modifier = Modifier.padding(15.dp) // Одинаковые отступы от краёв экрана
     ) {
         items(stories.chunked(2)) { pair ->
             Row(
@@ -25,7 +23,7 @@ fun StoriesGrid(stories: List<StoryPresentation>, favoritesViewModel: FavoritesV
             ) {
                 pair.forEach { story ->
                     Box(modifier = Modifier.weight(1f)) {
-                        StoryItem(story, favoritesViewModel) // Передаём StoryPresentation
+                        StoryItem(story, favoritesViewModel) // Передаём StoryPresentation и объединённый ViewModel
                     }
                 }
 
