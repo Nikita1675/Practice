@@ -61,17 +61,33 @@ class FavoritesStoryViewModel(
 
     fun toggleFavorite(story: StoryPresentation) {
         val currentFavorites = _favoriteStories.value.toMutableList()
-        if (currentFavorites.contains(story)) {
-            currentFavorites.remove(story) // Удаляем из избранного
+        if (currentFavorites.any { it.uniqueName == story.uniqueName }) {
+            currentFavorites.removeAll { it.uniqueName == story.uniqueName } // Удаляем из избранного
         } else {
             currentFavorites.add(story) // Добавляем в избранное
         }
         _favoriteStories.value = currentFavorites // Обновляем состояние
         saveFavorites() // Сохраняем изменения в SharedPreferences
+        // Обновляем состояние всех историй
+        _originalStories.value = _originalStories.value.map {
+            if (it.uniqueName == story.uniqueName) {
+                it.copy(isFavorite = !it.isFavorite) // Обновляем состояние isFavorite
+            } else {
+                it
+            }
+        }
+        // Обновляем фильтрованные истории, если в них содержится измененная история
+        _filteredStories.value = _filteredStories.value.map {
+            if (it.uniqueName == story.uniqueName) {
+                it.copy(isFavorite = !it.isFavorite) // Обновляем состояние isFavorite
+            } else {
+                it
+            }
+        }
     }
 
     fun isFavorite(story: StoryPresentation): Boolean {
-        return _favoriteStories.value.contains(story)
+        return _favoriteStories.value.any { it.uniqueName == story.uniqueName }
     }
 
     private fun saveFavorites() {
