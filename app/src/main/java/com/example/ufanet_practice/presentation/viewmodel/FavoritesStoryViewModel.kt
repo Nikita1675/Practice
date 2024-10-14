@@ -18,7 +18,13 @@ class FavoritesStoryViewModel(
     private val getStoriesUseCase: GetStoriesUseCase
 ) : AndroidViewModel(application) {
 
-    private val sharedPreferences = application.getSharedPreferences("favorites_prefs", Context.MODE_PRIVATE)
+    // Константы для SharedPreferences
+    companion object {
+        private const val PREFS_NAME = "favorites_prefs"
+        private const val FAVORITE_STORIES_KEY = "favorite_stories"
+    }
+
+    private val sharedPreferences = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val gson = Gson()
 
     private val _originalStories = MutableStateFlow<List<StoryPresentation>>(emptyList())
@@ -68,6 +74,7 @@ class FavoritesStoryViewModel(
         }
         _favoriteStories.value = currentFavorites // Обновляем состояние
         saveFavorites() // Сохраняем изменения в SharedPreferences
+
         // Обновляем состояние всех историй
         _originalStories.value = _originalStories.value.map {
             if (it.uniqueName == story.uniqueName) {
@@ -76,6 +83,7 @@ class FavoritesStoryViewModel(
                 it
             }
         }
+
         // Обновляем фильтрованные истории, если в них содержится измененная история
         _filteredStories.value = _filteredStories.value.map {
             if (it.uniqueName == story.uniqueName) {
@@ -93,12 +101,12 @@ class FavoritesStoryViewModel(
     private fun saveFavorites() {
         val editor = sharedPreferences.edit()
         val json = gson.toJson(_favoriteStories.value)
-        editor.putString("favorite_stories", json)
+        editor.putString(FAVORITE_STORIES_KEY, json)
         editor.apply()
     }
 
     private fun loadFavorites() {
-        val json = sharedPreferences.getString("favorite_stories", null)
+        val json = sharedPreferences.getString(FAVORITE_STORIES_KEY, null)
         if (json != null) {
             val type = object : TypeToken<List<StoryPresentation>>() {}.type
             val savedFavorites: List<StoryPresentation> = gson.fromJson(json, type)
