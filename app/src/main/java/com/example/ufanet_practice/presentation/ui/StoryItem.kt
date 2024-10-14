@@ -16,15 +16,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.ufanet_practice.domain.model.Story
 import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
 import com.example.ufanet_practice.R
+import com.example.ufanet_practice.presentation.model.StoryPresentation
 
 val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 
 @Composable
 fun StoryItem(
-    story: Story,
+    story: StoryPresentation, // Используем StoryPresentation
     favoritesViewModel: FavoritesViewModel
 ) {
     val context = LocalContext.current
@@ -72,9 +72,9 @@ fun StoryItem(
                     modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 7.dp)
                 ) {
                     FavoriteButton(
-                        isFavorite = favoritesViewModel.isFavorite(story),
+                        isFavorite = favoritesViewModel.isFavorite(story), // Проверяем, является ли история избранной
                         onToggleFavorite = {
-                            favoritesViewModel.toggleFavorite(story)
+                            favoritesViewModel.toggleFavorite(story) // Переключаем избранное
                         }
                     )
                 }

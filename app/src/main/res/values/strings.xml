@@ -4,4 +4,5 @@
     <string name="no_title">Без названия</string>
     <string name="favorite">Избранное</string>
     <string name="not_favorite">Не избранное</string>
+    <string name="unknown_view_model_class">Unknown ViewModel class</string>
 </resources>

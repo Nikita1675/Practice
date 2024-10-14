@@ -1,6 +1,6 @@
 package com.example.ufanet_practice.presentation.model
 
-data class StoryUiModel(
+data class StoryPresentation(
     val newsName: String?,
     val imageLogo: String?,
     val url: String?,

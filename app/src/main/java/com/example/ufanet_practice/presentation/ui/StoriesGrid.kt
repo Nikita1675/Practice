@@ -7,10 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.ufanet_practice.domain.model.Story
+import com.example.ufanet_practice.presentation.model.StoryPresentation
 import com.example.ufanet_practice.presentation.viewmodel.FavoritesViewModel
 
 @Composable
-fun StoriesGrid(stories: List<Story>, favoritesViewModel: FavoritesViewModel) {
+fun StoriesGrid(stories: List<StoryPresentation>, favoritesViewModel: FavoritesViewModel) {
     LazyColumn(
         modifier = Modifier
             .padding(15.dp) // Одинаковые отступы от краёв экрана
@@ -24,7 +25,7 @@ fun StoriesGrid(stories: List<Story>, favoritesViewModel: FavoritesViewModel) {
             ) {
                 pair.forEach { story ->
                     Box(modifier = Modifier.weight(1f)) {
-                        StoryItem(story, favoritesViewModel) // Передаем favoritesViewModel
+                        StoryItem(story, favoritesViewModel) // Передаём StoryPresentation
                     }
                 }
 
