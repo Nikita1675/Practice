@@ -20,7 +20,7 @@ import com.example.ufanet_practice.presentation.viewmodel.FavoritesStoryViewMode
 @Composable
 fun SearchBarComponent(
     searchText: MutableState<String>,
-    viewModel: FavoritesStoryViewModel, // Изменено на FavoritesStoryViewModel
+    onSearchQueryChanged: (String) -> Unit, // Лямбда для обновления текста поиска
     modifier: Modifier = Modifier
 ) {
     SearchBar(
@@ -33,7 +33,7 @@ fun SearchBarComponent(
         query = searchText.value,
         onQueryChange = { text ->
             searchText.value = text
-            viewModel.filterStories(text) // Используем filterStories из нового ViewModel
+            onSearchQueryChanged(text) // Вызываем лямбда для фильтрации
         },
         onSearch = {},
         placeholder = {

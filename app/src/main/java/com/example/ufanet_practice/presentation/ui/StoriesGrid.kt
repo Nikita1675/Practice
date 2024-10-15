@@ -10,28 +10,35 @@ import com.example.ufanet_practice.presentation.model.StoryPresentation
 import com.example.ufanet_practice.presentation.viewmodel.FavoritesStoryViewModel
 
 @Composable
-fun StoriesGrid(stories: List<StoryPresentation>, favoritesViewModel: FavoritesStoryViewModel) {
+fun StoriesGrid(
+    stories: List<StoryPresentation>,
+    isFavorite: (StoryPresentation) -> Boolean, // Лямбда для проверки избранного
+    onToggleFavorite: (StoryPresentation) -> Unit // Лямбда для переключения избранного
+) {
     LazyColumn(
-        modifier = Modifier.padding(15.dp) // Одинаковые отступы от краёв экрана
+        modifier = Modifier.padding(15.dp)
     ) {
         items(stories.chunked(2)) { pair ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 1.dp), // Отступы между строками
-                horizontalArrangement = Arrangement.spacedBy(1.dp) // Отступы между элементами в строке
+                    .padding(vertical = 1.dp),
+                horizontalArrangement = Arrangement.spacedBy(1.dp)
             ) {
                 pair.forEach { story ->
                     Box(modifier = Modifier.weight(1f)) {
-                        StoryItem(story, favoritesViewModel) // Передаём StoryPresentation и объединённый ViewModel
+                        StoryItem(
+                            story = story,
+                            isFavorite = { isFavorite(story) }, // Передаем лямбда для каждого элемента
+                            onToggleFavorite = { onToggleFavorite(story) } // Лямбда для переключения
+                        )
                     }
                 }
-
-                // Проверка на нечетное количество элементов
                 if (pair.size < 2) {
-                    Spacer(modifier = Modifier.weight(1f)) // Заполнение пустого пространства
+                    Spacer(modifier = Modifier.weight(1f))
                 }
             }
         }
     }
 }
+

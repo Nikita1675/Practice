@@ -27,7 +27,8 @@ val commonRoundedCornerShape = RoundedCornerShape(8.dp)
 @Composable
 fun StoryItem(
     story: StoryPresentation,
-    favoritesViewModel: FavoritesStoryViewModel
+    isFavorite: () -> Boolean, // Передаем лямбда для проверки избранного
+    onToggleFavorite: () -> Unit // Передаем лямбда для переключения избранного
 ) {
     val context = LocalContext.current
 
@@ -73,16 +74,13 @@ fun StoryItem(
                 Column(
                     modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 7.dp)
                 ) {
-                    // Используем collectAsState для проверки избранного
-                    val isFavorite by favoritesViewModel.favoriteStories.collectAsState()
                     FavoriteButton(
-                        isFavorite = favoritesViewModel.isFavorite(story),
-                        onToggleFavorite = {
-                            favoritesViewModel.toggleFavorite(story)
-                        }
+                        isFavorite = isFavorite(), // лямбда-функцию для проверки избранного
+                        onToggleFavorite = onToggleFavorite // лямбда для переключения избранного
                     )
                 }
             }
         }
     }
 }
+

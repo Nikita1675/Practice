@@ -13,20 +13,29 @@ import androidx.compose.foundation.layout.padding
 
 @Composable
 fun StoriesScreen(favoritesStoryViewModel: FavoritesStoryViewModel) {
-    // фильтрованные истории
     val stories by favoritesStoryViewModel.stories.collectAsState()
-
-    // Состояние для поиска
     val searchQuery = remember { mutableStateOf("") }
 
-    // Scaffold для топбара и контента
     Scaffold(
         topBar = {
-            SearchBarComponent(searchText = searchQuery, viewModel = favoritesStoryViewModel)
+            SearchBarComponent(
+                searchText = searchQuery,
+                onSearchQueryChanged = { query ->
+                    favoritesStoryViewModel.filterStories(query) // Передаем фильтрацию
+                }
+            )
         },
         content = { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
-                StoriesGrid(stories = stories, favoritesViewModel = favoritesStoryViewModel)
+                StoriesGrid(
+                    stories = stories,
+                    isFavorite = { story ->
+                        favoritesStoryViewModel.isFavorite(story) // Лямбда для проверки избранного
+                    },
+                    onToggleFavorite = { story ->
+                        favoritesStoryViewModel.toggleFavorite(story) // Лямбда для переключения избранного
+                    }
+                )
             }
         }
     )
