@@ -4,16 +4,18 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ufanet_practice.domain.model.Story
 import com.example.ufanet_practice.domain.usecase.GetStoriesUseCase
 import com.example.ufanet_practice.presentation.model.StoryPresentation
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavoritesStoryViewModel(
+@HiltViewModel
+class FavoritesStoryViewModel @Inject constructor(
     application: Application,
     private val getStoriesUseCase: GetStoriesUseCase
 ) : AndroidViewModel(application) {

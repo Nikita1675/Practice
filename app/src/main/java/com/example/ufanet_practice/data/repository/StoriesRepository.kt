@@ -1,11 +1,11 @@
 package com.example.ufanet_practice.data.repository
 
-import com.example.ufanet_practice.data.api.RetrofitInstance
+import com.example.ufanet_practice.data.api.ApiService
 import com.example.ufanet_practice.data.model.StoryDto
 
-class StoriesRepository {
+class StoriesRepository(private val apiService: ApiService) {
     suspend fun getStories(): List<StoryDto> {
-        val response = RetrofitInstance.api.getStories()
+        val response = apiService.getStories()
         return if (response.isSuccessful) {
             response.body()?.detail?.stories ?: emptyList()
         } else {
